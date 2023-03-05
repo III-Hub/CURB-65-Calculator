@@ -32,12 +32,12 @@
 2. **pip freeze > requirements.txt**
 3. **pip install -r requirements.txt**
 
-###Run the app
+### Run the app
 1. **gunicorn app:app -k uvicorn.workers.UvicornWorker**
 
 **the app is running on 127.0.0.1:8000**
 
-###Set up service
+### Set up service
 1. **sudo nano gunicorn_conf.py**
 
 **Past the following code into gunicorn_conf.py**
@@ -59,6 +59,7 @@ errorlog =  '/home/fastapi_example/error_log'
 ```
 
 **save and exit then run the following**
+
 2.**sudo nano /etc/systemd/system/fastapi_example.service**
 
 **Past the following code then save and exit**
@@ -91,7 +92,7 @@ WantedBy=multi-user.target
 3.**sudo systemctl start fastapi_example**
 4.**sudo systemctl enable fastapi_example**
 
-###Instal and setup NGINX
+### Instal and setup NGINX
 1.**sudo apt install nginx**
 2.**sudo systemctl start nginx**
 3.**sudo systemctl enable nginx**
@@ -123,6 +124,7 @@ server {
 ```
 
 **enable the configuration file**
+
 5.**sudo ln -s /etc/nginx/sites-available/api.slingacademy.com /etc/nginx/sites-enabled/**
 6.**sudo systemctl restart nginx**
 
