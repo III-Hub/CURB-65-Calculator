@@ -1,0 +1,130 @@
+<html>
+<head>
+    <title>Item Details</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>   
+    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+           document.getElementById("myForm").addEventListener("submit", function (e) {
+              var myForm = document.getElementById('myForm');
+              var patId = document.getElementById('patient_id').value;
+              myForm.action = '/search/' + patId;
+           });
+        });
+    </script>
+</head>
+<body>
+  <div class="container">
+        <p><h2>RSE Assessment: CURB-65 Calculator</h2></p>
+        <div class="row">
+         <div class="col-8">
+         <strong>Search Patients</strong>
+         </div>
+         <div class="col-4">
+          <form method="get" autocomplete="off" id="myForm"> 
+          <div class="row">
+           <div class="col-6">
+           <input type="text" class="form-control" name="patient_id" id="patient_id"  placeholder="Enter Patient ID"/> 
+           </div>
+           <div class="col-6" align="left">
+           <input type="submit" value="Search" class="form-control btn btn-primary " name=""> 
+           </div>
+          </form> 
+          </div>
+         </div>
+  
+
+    <div class="row">
+        <div class="col-12">
+            {% if message %}
+                <p>{{ message | safe }}</p>
+            {% endif %}
+          <table id="example" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Patient ID</th>
+                        <th>DOB</th>
+                        <th>Confusion</th>
+                        <th>Blood urea</th>
+                        <th>Respiratory rate</th>
+                        <th>Systolic BP</th>
+                        <th>Diastolic BP</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+          {% for pat in patients %}
+          <tr>
+                        <td>{{ pat.patientId }}</td>
+                        <td>{{ pat.dob }}</td>
+                        <td>{{ pat.confusion }}</td>
+                        <td>{{ pat.urea }}</td>
+                        <td>{{ pat.respiratory }}</td>
+                        <td>{{ pat.systolic }}</td>
+                        <td>{{ pat.diastolic }}</td>
+                        <td>{{ pat.score }}</td>
+                </tr>
+                {% endfor %}  
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Patient ID</th>
+                        <th>DOB</th>
+                        <th>Confusion</th>
+                        <th>Blood urea</th>
+                        <th>Respiratory rate</th>
+                        <th>Systolic BP</th>
+                        <th>Diastolic BP</th>
+                        <th>Score</th>
+                    </tr>
+                </tfoot>
+          </table>
+          
+         </div>
+         </div>
+         
+    </div> 
+    <div class="row">
+        <div class="col-6">
+            <h3>New patient </h3>
+            <form action="/" method="post">
+                <div class="form-group">
+                  <label for="id">Patient ID</label>
+                  <input type="text" class="form-control" id="pid" name="pid" minlength="7" maxlength="7" placeholder="Enter patient ID" required>
+                </div>
+                <div class="form-group">
+                    <label for="dob">Date of birth</label>
+                    <input type="date" class="form-control" id="dob" name="dob" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-check-label" for="confusion">Confusion?</label>
+                    <input type="radio" value="0" class="form-radio-input" id="no" name="confusion" checked>
+                    <label for="no">No</label>
+                    <input type="radio" value="1" class="form-radio-input" id="yes" name="confusion">
+                    <label for="yes">Yes</label>
+                </div>
+                <div class="form-group">
+                    <label for="urea">Blood urea</label>
+                    <input type="number" class="form-control" min="0" id="urea" name="urea" required>
+                </div>
+                <div class="form-group">
+                    <label for="respiratory">Respiratory rate</label>
+                    <input type="number" class="form-control" min="0" id="respiratory" name="respiratory" required>
+                </div>
+                <div class="form-group">
+                    <label for="systolic">Systolic Blodd preasure</label>
+                    <input type="number" class="form-control" min="0" id="systolic" name="systolic" required>
+                </div>
+                <div class="form-group">
+                    <label for="diatolic">Diatolic Blodd preasure</label>
+                    <input type="number" class="form-control" min="0" id="diatolic" name="diatolic" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
