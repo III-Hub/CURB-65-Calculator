@@ -125,7 +125,7 @@ server {
 
 **enable the configuration file**
 
-5.**sudo ln -s /etc/nginx/sites-available/api.slingacademy.com /etc/nginx/sites-enabled/**
-6.**sudo systemctl restart nginx**
+5. **sudo ln -s /etc/nginx/sites-available/api.slingacademy.com /etc/nginx/sites-enabled/**
+6. **sudo systemctl restart nginx**
 
 **The app is now accessible on server IP**
